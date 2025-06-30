@@ -10,6 +10,7 @@ void main() {
 final appLightTheme = ThemeData(
   primarySwatch: Colors.blue,
   brightness: Brightness.light,
+  scaffoldBackgroundColor: Color.fromARGB(255, 238, 237, 237),
 );
 
 // Dark Theme
@@ -33,7 +34,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Calculator',
-      theme: appLightTheme,
+      theme: _themeMode == ThemeMode.light
+          ? appLightTheme
+          : appDarkTheme,
       darkTheme: appDarkTheme,
       themeMode: _themeMode,
       home: CalculatorScreen(
@@ -328,7 +331,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
                   // Current display/result at bottom
                   Text(
                     _display,
@@ -386,7 +389,7 @@ class CalculatorButtons extends StatelessWidget {
     return Expanded(
       flex: flex.round(),
       child: Container(
-        margin: EdgeInsets.all(3),  
+        margin: EdgeInsets.all(3),
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
@@ -396,7 +399,7 @@ class CalculatorButtons extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
-            shadowColor: const Color.fromARGB(0, 0, 0, 1)
+            shadowColor: const Color.fromARGB(0, 0, 0, 1),
           ),
           child: Text(
             text,
@@ -414,7 +417,7 @@ class CalculatorButtons extends StatelessWidget {
 
     final numberColor = isDark
         ? Color.fromARGB(255, 45, 46, 54)
-        : Color(0xFFFFFFFF); 
+        : Color(0xFFFFFFFF);
     final operatorColor = Colors.blue;
     final operatorTextColor = Colors.white;
     final textColor = isDark ? Colors.white : Colors.black;
